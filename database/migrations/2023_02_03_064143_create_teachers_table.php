@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->id('id');
+            $table->increments('id');
             $table->string('name', 60);
             $table->string('email')->unique();
-            $table->string('gender', 6);
+            $table->string('phone01');
+            $table->string('phone02');
             $table->text('address');
-            $table->date('dob');
+            $table->string('gender');           
             $table->date('join_date');
+            $table->boolean('is_left');
             $table->timestamps();
         });
     }

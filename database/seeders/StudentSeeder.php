@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Models\Student;
+use Faker\Factory as Faker;
 
 class StudentSeeder extends Seeder
 {
@@ -16,11 +16,16 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('students')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'gender'
-            
-        ]);
+        $faker = Faker::create();
+        for ($i = 1; $i <= 16; $i++) {
+            $student = new Student;
+            $student->name = $faker->name;
+            $student->phone01 = $faker->phoneNumber;
+            $student->email = $faker->email;
+            $student->gender = "female";
+            $student->address = $faker->address;
+            $student->dob = $faker->date;
+            $student->save();
+        }
     }
 }
