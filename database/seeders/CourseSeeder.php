@@ -15,9 +15,9 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-
         $course = new Course;
-        $course->name = "Myanmar";
+        $course->course_id = "2";
+        $course->name = "English";
         $course->description = "hello";
         $course->total_lessons = "7";
         $course->start_date = Now();
