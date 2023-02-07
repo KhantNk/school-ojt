@@ -17,7 +17,13 @@ class CourseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'course_id' => $this->faker->unique()->numberBetween(1, 10),
+            'name' => $this->faker->name,
+            'description' => $this->faker->text(20),
+            'total_lessons' => $this->faker->numberBetween(1, 12),
+            'start_date' => $this->faker->date,
+            'course_duration' => $this->faker->numberBetween(1, 100),
+            'teacher_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

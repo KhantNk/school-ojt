@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function index(){
-        $data = Student::get();
-        return $data;
+        //
     }
 }

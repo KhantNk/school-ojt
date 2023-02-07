@@ -16,17 +16,8 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        for ($i = 1; $i <= 10; $i++) {
-            $student = new Student;
-            $gender = $faker->randomElement(['m', 'f']);
-            $student->name = $faker->name;
-            $student->phone = $faker->phoneNumber;
-            $student->email = $faker->email;
-            $student->gender = $gender;
-            $student->address = $faker->address;
-            $student->dob = $faker->date;
-            $student->save();
-        }
+        Student::factory()
+            ->count(10)
+            ->create();
     }
 }

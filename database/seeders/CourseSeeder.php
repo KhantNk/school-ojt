@@ -15,14 +15,8 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        $course = new Course;
-        $course->course_id = "3";
-        $course->name = "English";
-        $course->description = "hello";
-        $course->total_lessons = "7";
-        $course->start_date = Now();
-        $course->course_duration = "90";
-        $course->teacher_id = "1";
-        $course->save();
+        Course::factory()
+            ->count(10)
+            ->create();
     }
 }
