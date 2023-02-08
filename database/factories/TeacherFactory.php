@@ -25,7 +25,7 @@ class TeacherFactory extends Factory
             'address' => $this->faker->address,
             'gender' => $this->faker->randomElement(['m', 'f']),
             'join_date' =>$this->faker->date,
-            'is_left' => $this->faker->numberBetween(0,1),
+            'is_left' => $this->faker->boolean()
         ];
     }
 }
