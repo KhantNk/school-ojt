@@ -10,62 +10,63 @@
     <title>Document</title>
 </head>
 
-
 <body>
     <div class="container p-5">
         <div class="row col-md-6 col-md-offset-3 m-auto">
             <div class="panel panel-primary">
                 <div class="panel-heading text-center">
-                    <h1>Student Registration Form</h1>
+                    <h1>Course Registration Form</h1>
                 </div>
                 <div class="panel-body">
-                  {{-- <form action="/students.store" method="POST"> --}}
-                    <form action="/students" method="POST">
+                    {{-- <form action="/students.store" method="POST"> --}}
+                    <form action="/courses" method="POST">
                         @csrf
                         <div class="form-group pb-3">
-                            <label for="name">Name</label>
+                            <label for="name">Course ID</label>
+                            <input type="number" class="form-control" id="course_id" name="course_id"
+                                value="{{ old('course_id') }}" />
+                            @error('course_id')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group pb-3">
+                            <label for="name">name</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" />
                             @error('name')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group pb-3">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="{{ old('email') }}" />
-                            @error('email')
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description"
+                                value="{{ old('description') }}" />
+                            @error('description')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
-                        </div>
-                        <div class="form-group pb-3">
-                            <label for="phone">Phone Number</label>
-                            <input type="number" class="form-control" id="phone" name="phone"
-                                value="{{ old('phone') }}" />
-                            @error('phone')
-                                <div style="color: red">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group pb-3">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address"
-                                value="{{ old('address') }}" />
-                            @error('address')
-                                <div style="color: red">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group pb-3">
-                            <label for="gender">Gender</label> <br>
-                            <input type="radio" name="gender" value="m" />Male
-                            <input type="radio" name="gender" value="f" />Female
-                            <input type="radio" name="gender" value="o" />Other
                         </div>
                         <div class="form-group pb-3" data-provide="datepicker">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob" name="dob"
-                                value="{{ old('dob') }}" />
-                            @error('dob')
+                            <label for="start_date">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date"
+                                value="{{ old('start_date') }}" />
+                            @error('start_date')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group pb-3">
+                            <label for="course_duration">Course Duration</label>
+                            <input type="number" class="form-control" id="course_duration" name="course_duration"
+                                value="{{ old('course_duration') }}" />
+                            @error('course_duration')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group pb-3">
+                            <label for="teacher_id">Teacher ID</label>
+                            <input type="number" class="form-control" id="teacher_id" name="teacher_id"
+                                value="{{ old('teacher_id') }}" />
+                            @error('teacher_id')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>

@@ -28,14 +28,14 @@
             </thead>
             <tbody>
                     <tr>
-                        <td>{{ $students->id }}</td>
-                        <td>{{ $students->name }}</td>
-                        <td>{{ $students->phone }}</td>
-                        <td>{{ $students->email }}</td>
-                        <td>{{ $students->address }}</td>
-                        <td>{{ $students->gender }}</td>
-                        <td>{{ $students->dob }}</td>
-                        <td><a href="/students/edit/{{ $students->id }}" class="btn btn-primary">Edit</a></td>
+                        <td>{{ $teachers->id }}</td>
+                        <td>{{ $teachers->name }}</td>
+                        <td>{{ $teachers->phone }}</td>
+                        <td>{{ $teachers->email }}</td>
+                        <td>{{ $teachers->address }}</td>
+                        <td>{{ $teachers->gender }}</td>
+                        <td>{{ $teachers->dob }}</td>
+                        <td><a href="/teachers/edit/{{ $teachers->id }}" class="btn btn-primary">Edit</a></td>
                     </tr>
             </tbody>
         </table>

@@ -3,22 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
-    public function index(){
-        $students = Student::all();
+    public function index(Request $request){
+        $students = Student::paginate(5);
         return view('students.index', compact('students'));
     }
 
     public function create()
     {
-        return view('students.create');
+        $students = Student::all();
+        return view('students.create', compact('students'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name'  =>  'required',
+            'phone' => 'required',
+            'email' =>  'required|email',
+            'gender'  =>  'required',
+            'address'  =>  'required',
+            'dob'  =>  'required',     
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/students/create')
+            ->withErrors($validator)
+                ->withInput();
+        }
+
         $student = new Student;
         $student->name = request('name');
         $student->phone = request('phone');
@@ -39,14 +58,15 @@ class StudentController extends Controller
         return view('Students.edit', compact('students'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $student = Student::find($id);
-        $student->title = "Changed Title";
+        $student->name = $request->title;
+        $student->body = $request->body;
         $student->updated_at = now();
         $student->save();
 
-        return "Updated Student";
+        return redirect('/students');
     }
 
     public function show($id)
@@ -59,6 +79,6 @@ class StudentController extends Controller
     public function destroy($id)
     {
         Student::destroy($id);
-        return "Deleted Post";
+        return redirect('/students');
     }
 }

@@ -20,7 +20,7 @@
                 </div>
                 <div class="panel-body">
                   {{-- <form action="/students.store" method="POST"> --}}
-                    <form action="/students" method="POST">
+                    <form action="/teachers" method="POST">
                         @csrf
                         <div class="form-group pb-3">
                             <label for="name">Name</label>

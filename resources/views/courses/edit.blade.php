@@ -2,7 +2,7 @@
 
 <form action="/students/{{ $students->id }}" method="POST">
     @csrf
-    @method('PUT')
+     @method('PUT')
     <div class="form-group pb-3">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" value="{{ $students->name }}"/>
@@ -26,5 +26,5 @@
         <label for="dob">Date of Birth</label>
         <input type="date" class="form-control" id="dob" name="dob" value="{{ $students->dob}}" />
     </div>
-    <button type="submit">Update</button>
+     <button type="submit">Update</button>
 </form>

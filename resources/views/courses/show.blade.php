@@ -12,30 +12,30 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center">Student Detail</h1>
+        <h1 class="text-center">Course Detail</h1>
         <table class="table table-bordered mt-5">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Course ID</th>
                     <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Gender</th>
-                    <th>DOB</th>
+                    <th>Description</th>
+                    <th>Total Lessons</th>
+                    <th>Start Date</th>
+                    <th>Course Duration</th>
+                    <th>Teacher ID</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                     <tr>
-                        <td>{{ $students->id }}</td>
-                        <td>{{ $students->name }}</td>
-                        <td>{{ $students->phone }}</td>
-                        <td>{{ $students->email }}</td>
-                        <td>{{ $students->address }}</td>
-                        <td>{{ $students->gender }}</td>
-                        <td>{{ $students->dob }}</td>
-                        <td><a href="/students/edit/{{ $students->id }}" class="btn btn-primary">Edit</a></td>
+                        <td>{{ $courses->course_id }}</td>
+                        <td>{{ $courses->name }}</td>
+                        <td>{{ $courses->description }}</td>
+                        <td>{{ $courses->total_lessons }}</td>
+                        <td>{{ $courses->start_date }}</td>
+                        <td>{{ $courses->course_duration }}</td>
+                        <td>{{ $courses->teacher_id }}</td>
+                        <td><a href="/courses/edit/{{ $courses->id }}" class="btn btn-primary">Edit</a></td>
                     </tr>
             </tbody>
         </table>
