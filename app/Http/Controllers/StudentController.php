@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Validator;
 class StudentController extends Controller
 {
     public function index(Request $request){
-        $students = Student::paginate(5);
+        $students = Student::where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('gender', 'like', '%' . $request->search . '%')
+            ->orderBy('id', 'DESC')->paginate(5);
         return view('students.index', compact('students'));
     }
 
@@ -51,22 +53,26 @@ class StudentController extends Controller
         return redirect('/students');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $students = Student::find($id);
-
         return view('Students.edit', compact('students'));
     }
 
     public function update(Request $request, $id)
     {
         $student = Student::find($id);
-        $student->name = $request->title;
-        $student->body = $request->body;
+        $student->name = $request->name;
+        $student->phone = $request->phone;
+        $student->email = $request->email;
+        $student->gender = $request->gender;
+        $student->address = $request->address;
+        $student->dob = $request->dob;
+        $student->created_at = now();
         $student->updated_at = now();
         $student->save();
 
-        return redirect('/students');
+        return "Updated Student";
     }
 
     public function show($id)

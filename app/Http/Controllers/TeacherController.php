@@ -12,7 +12,9 @@ class TeacherController extends Controller
 {
     public function index(Request $request)
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('gender', 'like', '%' . $request->search . '%')
+            ->orderBy('id', 'DESC')->paginate(5);
         return view('teachers.index', compact('teachers'));
     }
 
@@ -26,11 +28,12 @@ class TeacherController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'  =>  'required',
-            'phone' => 'required',
+            'phone01' => 'required',
             'email' =>  'required|email',
             'gender'  =>  'required',
             'address'  =>  'required',
-            'dob'  =>  'required',
+            'join_date'  =>  'required',
+            'is_left'  =>  'required',
         ]);
 
         if ($validator->fails()) {
@@ -41,10 +44,9 @@ class TeacherController extends Controller
 
         $teacher = new Teacher;
         $teacher->name = request('name');
-        $teacher->phone = request('phone');
         $teacher->email = request('email');
-        $teacher->email = request('phone01');
-        $teacher->email = request('phone02');
+        $teacher->phone01 = request('phone01');
+        $teacher->phone02 = request('phone02');
         $teacher->gender = request('gender');
         $teacher->address = request('address');
         $teacher->join_date = request('join_date');
@@ -55,17 +57,24 @@ class TeacherController extends Controller
         return redirect('/teachers');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $teachers = Teacher::find($id);
 
         return view('teachers.edit', compact('teachers'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $teacher = Teacher::find($id);
-        $teacher->title = "Changed Title";
+        $teacher->name = $request->name;
+        $teacher->email = $request->email;
+        $teacher->phone01 = $request->phone01;
+        $teacher->phone02 = $request->phone02;
+        $teacher->gender = $request->gender;
+        $teacher->address = $request->address;
+        $teacher->join_date = $request->join_date;
+        $teacher->is_left = $request->is_left;
         $teacher->updated_at = now();
         $teacher->save();
 
@@ -82,6 +91,6 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         Teacher::destroy($id);
-        return "Deleted Post";
+        return redirect('/teachers');
     }
 }

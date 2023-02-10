@@ -22,15 +22,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/', [StudentController::class, 'index']);
-// Route::get('/courses', [StudentController::class, 'index']);
-// Route::get('/students/create', [StudentController::class, 'create']);
-// Route::post('/students/store', [StudentController::class, 'store']);
-// Route::get('/students/edit/{id}', [StudentController::class, 'edit']);
-// Route::post('/students/update/{id}', [StudentController::class, 'update']);
-// Route::get('/students/show/{id}', [StudentController::class, 'show']);
-// Route::get('/students/delete/{id}', [StudentController::class, 'destroy']);
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/create', [StudentController::class, 'create']);
+Route::post('/students/store', [StudentController::class, 'store']);
+Route::get('/students/edit/{id}', [StudentController::class, 'edit']);
+Route::post('/students/update/{id}', [StudentController::class, 'update']);
+Route::get('/students/show/{id}', [StudentController::class, 'show']);
+Route::delete('/students/delete/{id}', [StudentController::class, 'destroy']);
 
-Route::resource('students', StudentController::class);
-Route::resource('courses', CourseController::class);
-Route::resource('teachers', TeacherController::class);
+Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses/create', [CourseController::class, 'create']);
+Route::post('/courses/store', [CourseController::class, 'store']);
+Route::get('/courses/edit/{id}', [CourseController::class, 'edit']);
+Route::post('/courses/update/{id}', [CourseController::class, 'update']);
+Route::get('/courses/show/{id}', [CourseController::class, 'show']);
+Route::delete('/courses/delete/{id}', [CourseController::class, 'destroy']);
+
+Route::get('/teachers', [TeacherController::class, 'index']);
+Route::get('/teachers/create', [TeacherController::class, 'create']);
+Route::post('/teachers/store', [TeacherController::class, 'store']);
+Route::get('/teachers/edit/{id}', [TeacherController::class, 'edit']);
+Route::post('/teachers/update/{id}', [TeacherController::class, 'update']);
+Route::get('/teachers/show/{id}', [TeacherController::class, 'show']);
+Route::delete('/teachers/delete/{id}', [TeacherController::class, 'destroy']);
+
+// Route::resource('students', StudentController::class);
+// Route::resource('courses', CourseController::class);
+// Route::resource('teachers', TeacherController::class);

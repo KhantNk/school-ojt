@@ -16,10 +16,10 @@
         <div class="row col-md-6 col-md-offset-3 m-auto">
             <div class="panel panel-primary">
                 <div class="panel-heading text-center">
-                    <h1>Student Registration Form</h1>
+                    <h1>Teacher Registration Form</h1>
                 </div>
                 <div class="panel-body">
-                  {{-- <form action="/students.store" method="POST"> --}}
+                    {{-- <form action="/students.store" method="POST"> --}}
                     <form action="/teachers" method="POST">
                         @csrf
                         <div class="form-group pb-3">
@@ -40,10 +40,18 @@
                             @enderror
                         </div>
                         <div class="form-group pb-3">
-                            <label for="phone">Phone Number</label>
-                            <input type="number" class="form-control" id="phone" name="phone"
-                                value="{{ old('phone') }}" />
+                            <label for="phone01">Phone Number 01</label>
+                            <input type="number" class="form-control" id="phone01" name="phone01"
+                                value="{{ old('phone01') }}" />
                             @error('phone')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group pb-3">
+                            <label for="phone02">Phone Number 01</label>
+                            <input type="number" class="form-control" id="phone02" name="phone02"
+                                value="{{ old('phone02') }}" />
+                            @error('phone02')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
@@ -62,12 +70,17 @@
                             <input type="radio" name="gender" value="o" />Other
                         </div>
                         <div class="form-group pb-3" data-provide="datepicker">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob" name="dob"
-                                value="{{ old('dob') }}" />
-                            @error('dob')
+                            <label for="join_date">Join Date</label>
+                            <input type="date" class="form-control" id="join_date" name="join_date"
+                                value="{{ old('join_date') }}" />
+                            @error('join_date')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="form-group pb-3">
+                            <label for="is_left">Status</label> <br>
+                            <input type="radio" name="is_left" value="1" />Left
+                            <input type="radio" name="is_left" value="0" />Active
                         </div>
                         <input name=submit type="submit" class="btn btn-primary" />
                     </form>

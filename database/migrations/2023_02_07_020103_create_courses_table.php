@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->integer('course_duration');
             $table->integer('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

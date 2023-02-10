@@ -22,7 +22,7 @@
                     <form action="/courses" method="POST">
                         @csrf
                         <div class="form-group pb-3">
-                            <label for="name">Course ID</label>
+                            <label for="course_id">Course ID</label>
                             <input type="number" class="form-control" id="course_id" name="course_id"
                                 value="{{ old('course_id') }}" />
                             @error('course_id')

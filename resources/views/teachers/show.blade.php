@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center">Student Detail</h1>
+        <h1 class="text-center">Teacher Detail</h1>
         <table class="table table-bordered mt-5">
             <thead>
                 <tr>
@@ -22,7 +22,6 @@
                     <th>Email</th>
                     <th>Address</th>
                     <th>Gender</th>
-                    <th>DOB</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,11 +29,10 @@
                     <tr>
                         <td>{{ $teachers->id }}</td>
                         <td>{{ $teachers->name }}</td>
-                        <td>{{ $teachers->phone }}</td>
+                       <td>{{ $teachers->phone01}}</td>
                         <td>{{ $teachers->email }}</td>
                         <td>{{ $teachers->address }}</td>
                         <td>{{ $teachers->gender }}</td>
-                        <td>{{ $teachers->dob }}</td>
                         <td><a href="/teachers/edit/{{ $teachers->id }}" class="btn btn-primary">Edit</a></td>
                     </tr>
             </tbody>

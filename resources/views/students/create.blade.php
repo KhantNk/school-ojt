@@ -19,8 +19,8 @@
                     <h1>Student Registration Form</h1>
                 </div>
                 <div class="panel-body">
-                  {{-- <form action="/students.store" method="POST"> --}}
-                    <form action="/students" method="POST">
+                  <form action="/students.store" method="POST">
+                    {{-- <form action="/students" method="POST"> --}}
                         @csrf
                         <div class="form-group pb-3">
                             <label for="name">Name</label>

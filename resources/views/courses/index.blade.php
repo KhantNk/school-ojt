@@ -13,8 +13,8 @@
     <div class="container">
         <h1 class="text-center">Course Lists</h1>
         <form>
-            <div class="input-group">
-                <input type="text" name="search" value="{{ request('search') }}" class="form-control"
+            <div class="input-group justify-content-between">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control w-25"
                     placeholder="Search...">
                 <button class="btn btn-primary" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -25,7 +25,7 @@
                 </button>
             </div>
         </form>
-        <table class="table table-bordered ">
+        <table class="table table-bordered my-5 ">
             <thead>
                 <tr>
                     <th>Course ID</th>
@@ -41,15 +41,22 @@
             <tbody>
                 @foreach ($courses as $course)
                     <tr>
-                        <td>{{ $courses->firstItem()+$loop->index }}</td>
+                        {{-- <td>{{ $courses->firstItem()+$loop->index }}</td> --}}
+                        <td>{{ $course->id }}</td>
                         <td>{{ $course->name }}</td>
                         <td>{{ $course->description }}</td>
                         <td>{{ $course->total_lessons }}</td>
                         <td>{{ $course->start_date }}</td>
                         <td>{{ $course->course_duration }}</td>
                         <td>{{ $course->teacher_id }}</td>
-                        {{-- <td><a href="/students/show/{{ $course->id }}" class="btn btn-primary">Detail</a></td> --}}
-                        <td><a href="/courses/{{ $course->id }}" class="btn btn-primary">Detail</a></td>
+                        {{-- <td><a href="/courses/show/{{ $course->id }}" class="btn btn-primary">Detail</a></td> --}}
+                           <td class="d-flex justify-content-between"><a href="/courses/show/{{ $course->id }}" class="btn btn-primary">Detail</a>
+                               <form action="/courses/delete/{{ $course->id }}" method="POST">
+                                    @method('DELETE')
+                                   @csrf
+                                   <button type="submit" class="btn btn-danger">Delete</button>
+                               </form>
+                           </td>
                     </tr>
                 @endforeach
             </tbody>
