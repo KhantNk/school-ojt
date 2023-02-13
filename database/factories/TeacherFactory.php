@@ -20,8 +20,8 @@ class TeacherFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            'phone01' => $this->faker->phoneNumber,
-            'phone02' => $this->faker->phoneNumber,
+            'phone01' => $this->faker->numerify('###-###-####'),
+            'phone02' => $this->faker->numerify('###-###-####'),
             'address' => $this->faker->address,
             'gender' => $this->faker->randomElement(['m', 'f']),
             'join_date' =>$this->faker->date,

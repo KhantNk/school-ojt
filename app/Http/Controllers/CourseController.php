@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use  App\Http\Requests\CourseRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 
 {
     public function index(Request $request)
-    {
+
+    {   
         $courses = Course::where('name', 'like', '%' . $request->search . '%')
             ->orWhere('description', 'like', '%' . $request->search . '%')
-            ->orderBy('id', 'ASC')->paginate(5);
+            ->orderBy('id', 'DESC')->paginate(5);
         return view('courses.index', compact('courses'));
     }
 
@@ -26,12 +29,12 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'course_id'  =>  'required',
+            'course_id'  =>  'required|integer',
             'name' => 'required',
-            'Description' =>  'required',
+            'description' =>  'required',
             'start_date'  =>  'required',
-            'course_duration'  =>  'required',
-            'teacher_id'  =>  'required',
+            'total_lessons'=> 'required|integer',
+            'course_duration'  =>  'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -47,7 +50,6 @@ class CourseController extends Controller
         $course->total_lessons = request('total_lessons');
         $course->start_date = request('start_date');
         $course->course_duration = request('course_duration');
-        $course->teacher_id = request('teacher_id');
         $course->created_at = now();
         $course->updated_at = now();
         $course->save();
@@ -60,7 +62,7 @@ class CourseController extends Controller
         return view('courses.edit', compact('courses'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
         $course = course::find($id);
         $course->course_id = $request->course_id;
@@ -72,7 +74,7 @@ class CourseController extends Controller
         $course->updated_at = now();
         $course->save();
 
-        return "Updated Course";
+        return redirect('/courses');
     }
 
     public function show($id)

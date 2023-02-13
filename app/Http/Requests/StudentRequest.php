@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Student;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,11 +25,11 @@ class StudentRequest extends FormRequest
     {
         return [
             'name'  =>  'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' =>  'required|email',
-            'gender'  =>  'required',
+            'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
-            'dob'  =>  'required',
+            'dob'  =>  'required',     
         ];
     }
 }

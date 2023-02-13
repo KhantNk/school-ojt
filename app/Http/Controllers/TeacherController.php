@@ -6,6 +6,8 @@ use App\Models\Teacher;
 
 use Illuminate\Http\Request;
 
+use  App\Http\Requests\TeacherRequest;
+
 use Illuminate\Support\Facades\Validator;
 
 class TeacherController extends Controller
@@ -28,12 +30,13 @@ class TeacherController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'  =>  'required',
-            'phone01' => 'required',
+            'phone01' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone02' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' =>  'required|email',
-            'gender'  =>  'required',
+            'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
             'join_date'  =>  'required',
-            'is_left'  =>  'required',
+            'is_left'  =>  'required|in:1,0',
         ]);
 
         if ($validator->fails()) {
@@ -57,14 +60,15 @@ class TeacherController extends Controller
         return redirect('/teachers');
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         $teachers = Teacher::find($id);
 
         return view('teachers.edit', compact('teachers'));
     }
 
-    public function update(Request $request, $id)
+    public function update(TeacherRequest $request, $id)
+
     {
         $teacher = Teacher::find($id);
         $teacher->name = $request->name;
@@ -78,7 +82,7 @@ class TeacherController extends Controller
         $teacher->updated_at = now();
         $teacher->save();
 
-        return "Updated Teacher";
+        return redirect('/teachers');
     }
 
     public function show($id)

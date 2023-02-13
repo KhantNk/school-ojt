@@ -13,7 +13,7 @@ class CourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'course_id'  =>  'required|integer',
+            'name' => 'required',
+            'description' =>  'required',
+            'start_date'  =>  'required',
+            'total_lesson' => 'required|integer',
+            'course_duration'  =>  'required|integer',
+            'teacher_id'  =>  'required',
         ];
     }
+
 }

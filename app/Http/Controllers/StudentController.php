@@ -6,6 +6,8 @@ use App\Models\Student;
 
 use Illuminate\Http\Request;
 
+use  App\Http\Requests\StudentRequest;
+
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -27,9 +29,9 @@ class StudentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'  =>  'required',
-            'phone' => 'required',
-            'email' =>  'required|email',
-            'gender'  =>  'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'email' =>  'required|email|unique:students',
+            'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
             'dob'  =>  'required',     
         ]);
@@ -59,7 +61,7 @@ class StudentController extends Controller
         return view('Students.edit', compact('students'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
         $student = Student::find($id);
         $student->name = $request->name;
@@ -72,7 +74,7 @@ class StudentController extends Controller
         $student->updated_at = now();
         $student->save();
 
-        return "Updated Student";
+        return redirect('/students');
     }
 
     public function show($id)

@@ -20,7 +20,7 @@
                 </div>
                 <div class="panel-body">
                     {{-- <form action="/students.store" method="POST"> --}}
-                    <form action="/teachers" method="POST">
+                    <form action="/teachers/store" method="POST">
                         @csrf
                         <div class="form-group pb-3">
                             <label for="name">Name</label>
@@ -43,12 +43,12 @@
                             <label for="phone01">Phone Number 01</label>
                             <input type="number" class="form-control" id="phone01" name="phone01"
                                 value="{{ old('phone01') }}" />
-                            @error('phone')
+                            @error('phone01')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group pb-3">
-                            <label for="phone02">Phone Number 01</label>
+                            <label for="phone02">Phone Number 02</label>
                             <input type="number" class="form-control" id="phone02" name="phone02"
                                 value="{{ old('phone02') }}" />
                             @error('phone02')
@@ -68,6 +68,9 @@
                             <input type="radio" name="gender" value="m" />Male
                             <input type="radio" name="gender" value="f" />Female
                             <input type="radio" name="gender" value="o" />Other
+                            @error('gender')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group pb-3" data-provide="datepicker">
                             <label for="join_date">Join Date</label>
@@ -81,6 +84,9 @@
                             <label for="is_left">Status</label> <br>
                             <input type="radio" name="is_left" value="1" />Left
                             <input type="radio" name="is_left" value="0" />Active
+                            @error('is_left')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
                         </div>
                         <input name=submit type="submit" class="btn btn-primary" />
                     </form>

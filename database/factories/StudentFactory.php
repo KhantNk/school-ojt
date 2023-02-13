@@ -18,7 +18,7 @@ class StudentFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'phone' => $this->faker->phoneNumber,
+            'phone' => $this->faker->numerify('###-###-####'),
             'email' => $this->faker->email,
             'gender' => $this->faker->randomElement(['m', 'f']),
             'address' => $this->faker->address,

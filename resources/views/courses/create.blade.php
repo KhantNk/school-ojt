@@ -18,8 +18,8 @@
                     <h1>Course Registration Form</h1>
                 </div>
                 <div class="panel-body">
-                    {{-- <form action="/students.store" method="POST"> --}}
-                    <form action="/courses" method="POST">
+                    {{-- <form action="/courses.store" method="POST"> --}}
+                    <form action="/courses/store" method="POST">
                         @csrf
                         <div class="form-group pb-3">
                             <label for="course_id">Course ID</label>
@@ -63,10 +63,10 @@
                             @enderror
                         </div>
                         <div class="form-group pb-3">
-                            <label for="teacher_id">Teacher ID</label>
-                            <input type="number" class="form-control" id="teacher_id" name="teacher_id"
-                                value="{{ old('teacher_id') }}" />
-                            @error('teacher_id')
+                            <label for="total_lessons">Total Lessons</label>
+                            <input type="number" class="form-control" id="total_lessons" name="total_lessons"
+                                value="{{ old('total_lessons') }}" />
+                            @error('total_lessons')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>

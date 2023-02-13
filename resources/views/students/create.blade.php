@@ -19,8 +19,8 @@
                     <h1>Student Registration Form</h1>
                 </div>
                 <div class="panel-body">
-                  <form action="/students.store" method="POST">
-                    {{-- <form action="/students" method="POST"> --}}
+                    <form action="/students/store" method="POST">
+                        {{-- <form action="/students" method="POST"> --}}
                         @csrf
                         <div class="form-group pb-3">
                             <label for="name">Name</label>
@@ -60,6 +60,9 @@
                             <input type="radio" name="gender" value="m" />Male
                             <input type="radio" name="gender" value="f" />Female
                             <input type="radio" name="gender" value="o" />Other
+                            @error('gender')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group pb-3" data-provide="datepicker">
                             <label for="dob">Date of Birth</label>

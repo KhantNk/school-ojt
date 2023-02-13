@@ -13,7 +13,7 @@ class TeacherRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return True;
     }
 
     /**
@@ -24,7 +24,14 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'  =>  'required',
+            'phone01' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone02' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'email' =>  'required|email',
+            'gender'  =>  'required|in:m,f,o',
+            'address'  =>  'required',
+            'join_date'  =>  'required',
+            'is_left'  =>  'required|in:1,0',
         ];
     }
 }

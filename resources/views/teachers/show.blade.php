@@ -22,7 +22,7 @@
                     <th>Email</th>
                     <th>Address</th>
                     <th>Gender</th>
-                    <th></th>
+                    <th>Course</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +33,7 @@
                         <td>{{ $teachers->email }}</td>
                         <td>{{ $teachers->address }}</td>
                         <td>{{ $teachers->gender }}</td>
+                        <td>{{ $teachers->course->name }}</td>
                         <td><a href="/teachers/edit/{{ $teachers->id }}" class="btn btn-primary">Edit</a></td>
                     </tr>
             </tbody>

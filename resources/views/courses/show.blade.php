@@ -22,7 +22,7 @@
                     <th>Total Lessons</th>
                     <th>Start Date</th>
                     <th>Course Duration</th>
-                    <th>Teacher ID</th>
+                    <th>Teacher Name</th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,7 +34,8 @@
                         <td>{{ $courses->total_lessons }}</td>
                         <td>{{ $courses->start_date }}</td>
                         <td>{{ $courses->course_duration }}</td>
-                        <td>{{ $courses->teacher_id }}</td>
+                        <td>{{ $courses->teacher->name }}</td>
+                      
                         <td><a href="/courses/edit/{{ $courses->id }}" class="btn btn-primary">Edit</a></td>
                     </tr>
             </tbody>
