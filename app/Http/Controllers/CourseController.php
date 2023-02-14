@@ -32,7 +32,7 @@ class CourseController extends Controller
             'course_id'  =>  'required|integer',
             'name' => 'required',
             'description' =>  'required',
-            'start_date'  =>  'required',
+            'start_date'  =>  'required|date',
             'total_lessons'=> 'required|integer',
             'course_duration'  =>  'required|integer',
         ]);
@@ -50,10 +50,11 @@ class CourseController extends Controller
         $course->total_lessons = request('total_lessons');
         $course->start_date = request('start_date');
         $course->course_duration = request('course_duration');
+        $course->teacher_id = request('teacher_id');
         $course->created_at = now();
         $course->updated_at = now();
         $course->save();
-        return redirect('/courses');
+        return redirect('/courses');     
     }
 
     public function edit($id)

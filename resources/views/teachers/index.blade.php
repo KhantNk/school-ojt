@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center">Students Lists</h1>
+        <h1 class="text-center">Teachers Lists</h1>
         <form>
             <div class="input-group justify-content-between">
                 <input type="text" name="search" value="{{ request('search') }}" class="form-control w-25"

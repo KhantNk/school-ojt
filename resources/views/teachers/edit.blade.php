@@ -12,7 +12,7 @@
     <div class="row col-md-6 col-md-offset-3 m-auto">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h1>Teacher Edit</h1>
+                <h1>Teacher Update Form</h1>
 
                 <form action="/teachers/update/{{ $teachers->id }}" method="POST">
                     @csrf

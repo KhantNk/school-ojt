@@ -30,7 +30,7 @@ class TeacherRequest extends FormRequest
             'email' =>  'required|email',
             'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
-            'join_date'  =>  'required',
+            'join_date'  =>  'required|date',
             'is_left'  =>  'required|in:1,0',
         ];
     }

@@ -27,7 +27,7 @@ class CourseRequest extends FormRequest
             'course_id'  =>  'required|integer',
             'name' => 'required',
             'description' =>  'required',
-            'start_date'  =>  'required',
+            'start_date'  =>  'required|date_format:m/d/Y',
             'total_lesson' => 'required|integer',
             'course_duration'  =>  'required|integer',
             'teacher_id'  =>  'required',

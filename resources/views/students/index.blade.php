@@ -13,9 +13,10 @@
     <div class="container">
         <h1 class="text-center">Students Lists</h1>
         <form>
-            <div class="input-group justify-content-between">
-                <input type="text" name="search" value="{{ request('search') }}" class="form-control w-25"
+            <div class="input-group">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control"
                     placeholder="Search...">
+                {{-- <a href="/students/create" class="btn btn-primary">Create A Student</a> --}}
                 <button class="btn btn-primary" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-search" viewBox="0 0 16 16">
@@ -38,22 +39,23 @@
             </thead>
             <tbody>
                 @foreach ($students as $student)
-                       <tr>
-                           <td>{{ $student->id }}</td>
-                           <td>{{ $student->name }}</td>
-                           <td>{{ $student->gender }}</td>
-                           <td>{{ $student->phone }}</td>
-                           <td>{{ $student->email }}</td>
-                           {{-- <td><a href="/students/show/{{ $student->id }}" class="btn btn-primary">Detail</a></td> --}}
-                           <td class="d-flex justify-content-between"><a href="/students/show/{{ $student->id }}" class="btn btn-primary">Detail</a>
-                               <form action="/students/delete/{{ $student->id }}" method="POST">
-                                   @method('DELETE')
-                                   @csrf
-                                   <button type="submit" class="btn btn-danger">Delete</button>
-                               </form>
-                           </td>
-                       </tr>
-                   @endforeach
+                    <tr>
+                        <td>{{ $student->id }}</td>
+                        <td>{{ $student->name }}</td>
+                        <td>{{ $student->gender }}</td>
+                        <td>{{ $student->phone }}</td>
+                        <td>{{ $student->email }}</td>
+                        {{-- <td><a href="/students/show/{{ $student->id }}" class="btn btn-primary">Detail</a></td> --}}
+                        <td class="d-flex justify-content-between"><a href="/students/show/{{ $student->id }}"
+                                class="btn btn-primary">Detail</a>
+                            <form action="/students/delete/{{ $student->id }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         {{ $students->links() }}

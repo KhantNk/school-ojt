@@ -29,7 +29,7 @@ class StudentRequest extends FormRequest
             'email' =>  'required|email',
             'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
-            'dob'  =>  'required',     
+            'dob'  =>  'required|date',     
         ];
     }
 }

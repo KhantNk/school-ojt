@@ -33,7 +33,7 @@ class StudentController extends Controller
             'email' =>  'required|email|unique:students',
             'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',
-            'dob'  =>  'required',     
+            'dob'  =>  'required|date',     
         ]);
 
         if ($validator->fails()) {

@@ -70,6 +70,14 @@
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group pb-3">
+                            <label for="teacher_id">Teacher ID</label>
+                            <input type="number" class="form-control" id="teacher_id" name="teacher_id"
+                                value="{{ old('teacher_id') }}" />
+                            @error('teacher_id')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <input name=submit type="submit" class="btn btn-primary" />
                     </form>
                 </div>
