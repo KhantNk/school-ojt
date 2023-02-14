@@ -11,8 +11,17 @@ class Course extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'course_id',
+        'name',
+        'description',
+        'total_lessons',
+        'start_date',
+        'course_duration',
+    ];
+
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class , 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 }
