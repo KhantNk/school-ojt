@@ -19,91 +19,53 @@ class CourseController extends Controller
     }
     public function index()
 
-    {   
+    {
         return view('courses.index');
     }
 
-    public function showCourseList()
+    public function showList()
+
     {
         $data = $this->courseService->getAllCourses();
-        return view('courses.index', compact('data'));
+        return view('courses.list', compact('data'));
     }
 
 
-    public function showCreateForm()
+    public function create(Request $request)
     {
-        return view('courses.create');
+        $data= $this->courseService->getAllCourses();
+        return view('courses.create', compact('data'));
     }
-    //
-
-    // public function create(CourseRequest $request)
-    // {
-    //     $this->courseService->create($request);
-    //     return redirect('./courses/');
-    // }
 
 
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'course_id'  =>  'required|integer',
-    //         'name' => 'required',
-    //         'description' =>  'required',
-    //         'start_date'  =>  'required|date',
-    //         'total_lessons'=> 'required|integer',
-    //         'course_duration'  =>  'required|integer',
-    //     ]);
+    public function store(Request $request)
+    {  
+        $this->courseService->store($request);
+        return redirect('/courses/list');
+    }
 
-    //     if ($validator->fails()) {
-    //         return redirect('/courses/create')
-    //             ->withErrors($validator)
-    //             ->withInput();
-    //     }
+    public function edit($id)
+    {
+        $data = $this->courseService->edit($id);
+        return view('courses.edit')->with(['data' => $data[0]]);
+    }
 
-    //     $course = new course;
-    //     $course->course_id = request('course_id');
-    //     $course->name = request('name');
-    //     $course->description = request('description');
-    //     $course->total_lessons = request('total_lessons');
-    //     $course->start_date = request('start_date');
-    //     $course->course_duration = request('course_duration');
-    //     $course->teacher_id = request('teacher_id');
-    //     $course->created_at = now();
-    //     $course->updated_at = now();
-    //     $course->save();
-    //     return redirect('/courses');     
-    // }
 
-    // public function edit($id)
-    // {
-    //     $courses = course::find($id);
-    //     return view('courses.edit', compact('courses'));
-    // }
+    public function update(CourseRequest $request, $id)
+    {
+       $this->courseService->update($request, $id);
+        return redirect('/courses/list');
+    }
 
-    // public function update(CourseRequest $request, $id)
-    // {
-    //     $course = course::find($id);
-    //     $course->course_id = $request->course_id;
-    //     $course->name = $request->name;
-    //     $course->description = $request->description;
-    //     $course->total_lessons = $request->total_lessons;
-    //     $course->start_date = $request->start_date;
-    //     $course->course_duration = $request->course_duration;
-    //     $course->updated_at = now();
-    //     $course->save();
+    public function show($id)
+    {
+        $courses = Course::find($id);
+        return view('courses.show', compact('courses'));
+    }
 
-    //     return redirect('/courses');
-    // }
-
-    // public function show($id)
-    // {
-    //     $courses = Course::find($id);
-    //     return view('courses.show', compact('courses'));
-    // }
-
-    // public function destroy($id)
-    // {
-    //     Course::destroy($id);
-    //     return redirect('/courses');
-    // }
+    public function destroy($id)
+    {
+        $this->courseService->destory($id);
+        return redirect('/courses');
+    }
 }

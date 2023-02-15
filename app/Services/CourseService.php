@@ -23,18 +23,11 @@ class CourseService implements CourseServiceInterface
     {
         return $this->courseDao->getAllCourses();
     }
-    /**
-     * Register User function
-     *
-     * @param \Request $request
-     * @return void
-     */
 
 
     public function create($request)
     {
-        $data = $this->getData($request);
-        $this->courseDao->store($data);
+         $this->getData($request);
     }
 
 
@@ -44,8 +37,10 @@ class CourseService implements CourseServiceInterface
             'course_id' => $request->course_id,
             'name' => $request->name,
             'description' => $request->description,
+            'total_lessons' => $request->total_lessons,
             'start_date' => $request->start_date,
-            'course_duration ' => $request->course_duration,
+            'course_duration' => $request->course_duration,
+            'teacher_id'=> $request->teacher_id,
         ];
 
         $this->courseDao->store($data);
@@ -57,55 +52,39 @@ class CourseService implements CourseServiceInterface
             'course_id' => $request->course_id,
             'name' => $request->name,
             'description' => $request->description,
+            'total_lessons' => $request->total_lessons,
             'start_date' => $request->start_date,
-            'course_duration ' => $request->course_duration,
+            'course_duration' => $request->course_duration,
+            'teacher_id' => $request->teacher_id,
         ];
     }
-    /**
-     * Show User Data function
-     *
-     * @param int $id
-     * @return void
-     */
-    public function profile($id)
-    {
-        return $this->courseDao->profile($id);
-    }
 
-    /**
-     * Edit User function
-     *
-     * @param int $id
-     * @return void
-     */
     public function edit($id)
     {
         return $this->courseDao->edit($id);
     }
 
-    /**
-     * Update User function
-     *
-     * @param \Request $req
-     * @param int $id
-     * @return void
-     */
-    public function update($req, $id)
+
+    public function update($request, $id)
     {
-        $data = $this->getUpdateData($req);
+        $data = $this->getUpdateData($request);
         return $this->courseDao->update($data, $id);
     }
 
-    private function getUpdateData($req)
+    private function getUpdateData($request)
     {
         return [
-            'name' => $req->name,
-            'email' => $req->email,
-            'role' => $req->role,
+            'course_id' => $request->course_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'total_lessons' => $request->total_lessons,
+            'start_date' => $request->start_date,
+            'course_duration' => $request->course_duration,
+            'teacher_id' => $request->teacher_id,
         ];
     }
 
-    public function delete($id)
+    public function destory($id)
     {
         return $this->courseDao->delete($id);
     }

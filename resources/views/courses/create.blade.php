@@ -29,7 +29,6 @@
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group pb-3">
                             <label for="name">name</label>
                             <input type="text" class="form-control" id="name" name="name"
@@ -43,6 +42,14 @@
                             <input type="text" class="form-control" id="description" name="description"
                                 value="{{ old('description') }}" />
                             @error('description')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group pb-3">
+                            <label for="total_lessons">Total Lessons</label>
+                            <input type="number" class="form-control" id="total_lessons" name="total_lessons"
+                                value="{{ old('total_lessons') }}" />
+                            @error('total_lessons')
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
@@ -62,14 +69,7 @@
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group pb-3">
-                            <label for="total_lessons">Total Lessons</label>
-                            <input type="number" class="form-control" id="total_lessons" name="total_lessons"
-                                value="{{ old('total_lessons') }}" />
-                            @error('total_lessons')
-                                <div style="color: red">{{ $message }}</div>
-                            @enderror
-                        </div>
+
                         <div class="form-group pb-3">
                             <label for="teacher_id">Teacher ID</label>
                             <input type="number" class="form-control" id="teacher_id" name="teacher_id"

@@ -18,6 +18,7 @@ class Course extends Model
         'total_lessons',
         'start_date',
         'course_duration',
+        'teacher_id'
     ];
 
     public function teacher()

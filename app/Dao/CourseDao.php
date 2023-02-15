@@ -9,7 +9,7 @@ class CourseDao implements CourseDaoInterface
 {
     public function getAllCourses()
     {
-        return Course::all();
+        return Course::latest()->paginate(5);
     }
     /**
      * Register Course function
@@ -19,6 +19,11 @@ class CourseDao implements CourseDaoInterface
      */
 
     public function create($data)
+    {
+        Course::insert($data);
+    }
+
+    public function store($data)
     {
         Course::insert($data);
     }
