@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Contracts\Services\CourseServiceInterface;
+use App\Contracts\Dao\CourseDaoInterface;
+use App\Dao\CourseDao;
+use App\Services\CourseService;
 
 use Illuminate\Pagination\Paginator;
 
@@ -15,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(couseRepositoryInterface::class, couseRepository::class);
-        $this->app->bind(couseServiceInterface::class, couseService::class);
+        $this->app->bind(CourseDaoInterface::class, courseDao::class);
+        $this->app->bind(CourseServiceInterface::class, courseService::class);
     }
 
     /**
@@ -26,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        // Paginator::useBootstrap();
     }
 }
