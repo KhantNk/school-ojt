@@ -30,7 +30,6 @@ class CourseController extends Controller
         return view('courses.list', compact('data'));
     }
 
-
     public function create(Request $request)
     {
         $data= $this->courseService->getAllCourses();
@@ -38,10 +37,10 @@ class CourseController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {  
         $this->courseService->store($request);
-        return redirect('/courses/list');
+        return redirect('/courses');
     }
 
     public function edit($id)
@@ -54,7 +53,7 @@ class CourseController extends Controller
     public function update(CourseRequest $request, $id)
     {
        $this->courseService->update($request, $id);
-        return redirect('/courses/list');
+        return redirect('/courses');
     }
 
     public function show($id)

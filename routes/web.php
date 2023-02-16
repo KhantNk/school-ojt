@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'showList']);
 Route::get('/students/create', [StudentController::class, 'create']);
 Route::post('/students/store', [StudentController::class, 'store']);
 Route::get('/students/edit/{id}', [StudentController::class, 'edit']);
@@ -38,7 +38,7 @@ Route::post('/courses/update/{id}', [CourseController::class, 'update']);
 Route::get('/courses/show/{id}', [CourseController::class, 'show']);
 Route::delete('/courses/delete/{id}', [CourseController::class, 'destroy']);
 
-Route::get('/teachers', [TeacherController::class, 'index']);
+Route::get('/teachers', [TeacherController::class, 'showList']);
 Route::get('/teachers/create', [TeacherController::class, 'create']);
 Route::post('/teachers/store', [TeacherController::class, 'store']);
 Route::get('/teachers/edit/{id}', [TeacherController::class, 'edit']);

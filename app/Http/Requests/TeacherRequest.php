@@ -26,7 +26,7 @@ class TeacherRequest extends FormRequest
         return [
             'name'  =>  'required',
             'phone01' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'phone02' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone02' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' =>  'required|email',
             'gender'  =>  'required|in:m,f,o',
             'address'  =>  'required',

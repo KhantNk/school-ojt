@@ -6,95 +6,67 @@ use App\Models\Teacher;
 
 use Illuminate\Http\Request;
 
+use App\Contracts\Services\TeacherServiceInterface;
+
 use  App\Http\Requests\TeacherRequest;
 
 use Illuminate\Support\Facades\Validator;
 
 class TeacherController extends Controller
 {
-    public function index(Request $request)
+    private $teacherService;
+    public function __construct(TeacherServiceInterface $teacherService)
     {
-        $teachers = Teacher::where('name', 'like', '%' . $request->search . '%')
-            ->orWhere('gender', 'like', '%' . $request->search . '%')
-            ->orderBy('id', 'DESC')->paginate(5);
-        return view('teachers.index', compact('teachers'));
+        $this->teacherService = $teacherService;
+    }
+    public function index()
+
+    {
+        return view('teachers.index');
     }
 
-    public function create()
+    public function showList()
+
     {
-        $teachers = Teacher::all();
-        return view('teachers.create', compact('teachers'));
+        $data = $this->teacherService->getAllTeachers();
+        return view('teachers.list', compact('data'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name'  =>  'required',
-            'phone01' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'phone02' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'email' =>  'required|email',
-            'gender'  =>  'required|in:m,f,o',
-            'address'  =>  'required',
-            'join_date'  =>  'required|date',
-            'is_left'  =>  'required|in:1,0',
-        ]);
+        $data = $this->teacherService->getAllTeachers();
+        return view('teachers.create', compact('data'));
+    }
 
-        if ($validator->fails()) {
-            return redirect('/teachers/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
 
-        $teacher = new Teacher;
-        $teacher->name = request('name');
-        $teacher->email = request('email');
-        $teacher->phone01 = request('phone01');
-        $teacher->phone02 = request('phone02');
-        $teacher->gender = request('gender');
-        $teacher->address = request('address');
-        $teacher->join_date = request('join_date');
-        $teacher->is_left = request('is_left');
-        $teacher->created_at = now();
-        $teacher->updated_at = now();
-        $teacher->save();
+    public function store(TeacherRequest $request)
+    {
+        $this->teacherService->store($request);
         return redirect('/teachers');
     }
 
     public function edit($id)
     {
-        $teachers = Teacher::find($id);
-
-        return view('teachers.edit', compact('teachers'));
+        $data = $this->teacherService->edit($id);
+        return view('teachers.edit')->with(['data' => $data[0]]);
     }
 
+
     public function update(TeacherRequest $request, $id)
-
     {
-        $teacher = Teacher::find($id);
-        $teacher->name = $request->name;
-        $teacher->email = $request->email;
-        $teacher->phone01 = $request->phone01;
-        $teacher->phone02 = $request->phone02;
-        $teacher->gender = $request->gender;
-        $teacher->address = $request->address;
-        $teacher->join_date = $request->join_date;
-        $teacher->is_left = $request->is_left;
-        $teacher->updated_at = now();
-        $teacher->save();
-
+        $this->teacherService->update($request, $id);
         return redirect('/teachers');
     }
 
     public function show($id)
     {
         $teachers = Teacher::find($id);
-
         return view('teachers.show', compact('teachers'));
     }
 
     public function destroy($id)
     {
-        Teacher::destroy($id);
+        $this->teacherService->destory($id);
         return redirect('/teachers');
     }
 }

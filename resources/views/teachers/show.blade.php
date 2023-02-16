@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-
-<body>
+@section('content')
     <div class="container">
         <h1 class="text-center">Teacher Details</h1>
         <table class="table table-bordered mt-5">
@@ -25,19 +15,15 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr>
-                        <td>{{ $teachers->id }}</td>
-                        <td>{{ $teachers->name }}</td>
-                       <td>{{ $teachers->phone01}}</td>
-                        <td>{{ $teachers->email }}</td>
-                        <td>{{ $teachers->address }}</td>
-                        <td>{{ $teachers->gender }}</td>
-                        <td><a href="/teachers/edit/{{ $teachers->id }}" class="btn btn-primary">Edit</a></td>
-                    </tr>
+                <tr>
+                    <td>{{ $teachers->id }}</td>
+                    <td>{{ $teachers->name }}</td>
+                    <td>{{ $teachers->phone01 }}</td>
+                    <td>{{ $teachers->email }}</td>
+                    <td>{{ $teachers->address }}</td>
+                    <td>{{ $teachers->gender }}</td>
+                    <td><a href="/teachers/edit/{{ $teachers->id }}" class="btn btn-primary">Edit</a></td>
+                </tr>
             </tbody>
         </table>
-
     </div>
-</body>
-
-</html>

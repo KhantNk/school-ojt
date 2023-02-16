@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 
+use App\Contracts\Services\StudentServiceInterface;
+
 use Illuminate\Http\Request;
 
 use  App\Http\Requests\StudentRequest;
@@ -12,81 +14,58 @@ use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
-    public function index(Request $request){
-        $students = Student::where('name', 'like', '%' . $request->search . '%')
-            ->orWhere('gender', 'like', '%' . $request->search . '%')
-            ->orderBy('id', 'DESC')->paginate(5);
-        return view('students.index', compact('students'));
+    private $studentService;
+    public function __construct(StudentServiceInterface $studentService)
+    {
+        $this->studentService = $studentService;
+    }
+    public function index()
+
+    {
+        return view('students.index');
     }
 
-    public function create()
+    public function showList()
+
     {
-        $students = Student::all();
-        return view('students.create', compact('students'));
+        $data = $this->studentService->getAllStudents();
+        return view('students.list', compact('data'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name'  =>  'required',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'email' =>  'required|email|unique:students',
-            'gender'  =>  'required|in:m,f,o',
-            'address'  =>  'required',
-            'dob'  =>  'required|date',     
-        ]);
+        $data = $this->studentService->getAllStudents();
+        return view('students.create', compact('data'));
+    }
 
-        if ($validator->fails()) {
-            return redirect('/students/create')
-            ->withErrors($validator)
-                ->withInput();
-        }
 
-        $student = new Student;
-        $student->name = request('name');
-        $student->phone = request('phone');
-        $student->email = request('email');
-        $student->gender = request('gender');
-        $student->address = request('address');
-        $student->dob = request('dob');
-        $student->created_at = now();
-        $student->updated_at = now();
-        $student->save();
+    public function store(StudentRequest $request)
+    {
+        $this->studentService->store($request);
         return redirect('/students');
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $students = Student::find($id);
-        return view('Students.edit', compact('students'));
+        $data = $this->studentService->edit($id);
+        return view('students.edit')->with(['data' => $data[0]]);
     }
 
     public function update(StudentRequest $request, $id)
     {
-        $student = Student::find($id);
-        $student->name = $request->name;
-        $student->phone = $request->phone;
-        $student->email = $request->email;
-        $student->gender = $request->gender;
-        $student->address = $request->address;
-        $student->dob = $request->dob;
-        $student->created_at = now();
-        $student->updated_at = now();
-        $student->save();
-
+        $this->studentService->update($request, $id);
         return redirect('/students');
     }
 
     public function show($id)
     {
         $students = Student::find($id);
-
         return view('students.show', compact('students'));
     }
 
     public function destroy($id)
     {
-        Student::destroy($id);
+        $this->studentService->destory($id);
         return redirect('/students');
     }
 }

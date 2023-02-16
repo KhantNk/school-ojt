@@ -60,7 +60,7 @@ class CourseDao implements CourseDaoInterface
 
     public function delete($id)
     {
-        $Course = Course::find($id);
-        $Course->delete();
+        $course = Course::find($id);
+        $course->delete();
     }
 }
