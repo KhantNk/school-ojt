@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,3 +50,10 @@ Route::delete('/teachers/delete/{id}', [TeacherController::class, 'destroy']);
 // Route::resource('students', StudentController::class);
 // Route::resource('courses', CourseController::class);
 // Route::resource('teachers', TeacherController::class);
+
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users/store', [UserController::class, 'userPostRegistration']);
+Route::get('/users/login', [UserController::class, 'userLoginIndex']);
+Route::post('/login', [UserController::class, 'userPostLogin']);
+Route::get('/dashboard', [UserController::class, 'dashboard']);
+Route::get('logout', [UserController::class, 'logout']);
